@@ -18,8 +18,8 @@
 		}
 		
 		:root {
-			--primary: oklch(45% 0.017 213.2);
-			--secondary: oklch(21.8% 0.008 223.9);
+			--primary: oklch(86.9% 0.022 252.894);
+			--secondary: oklch(98.4% 0.003 247.858);	
 		}
 		
 		
@@ -32,18 +32,49 @@
 			background-color: var(--primary);
 		}
 		
-		.form { 
+		.form {
+			width: 50%;
+			max-width: 600px;
+			
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+			
 			padding: 1rem;
-			background-color: var(--secondary);
-			border-radius: 1rem;
+			border-radius: .5rem;
+			background-color: var(--secondary);	
+		
+		}	
+		
+		.field {
+			width: 75%;
+			display: flex; 
+			flex-direction: column;
+			
+			
+	
+			
+			.field__input {
+        		width: 100%;
+				padding: .5rem;
+		
+		 	}
+		
 		
 		}
 		
-		.field {
-			display: flex;
-			flex-direction: column;
-			
+		 
+	 	.error{
+	 		text-align: center;
+		 	padding: 1rem;
+		 	color: oklch(39.6% 0.141 25.723);
+		 	background-color: oklch(80.8% 0.114 19.571);
+		 	border-radius: .5rem;
+		 
 		 }
+		 
+		
 		
 		
 		
@@ -53,24 +84,31 @@
 </head>
 <body>
 	
-	
-	<form method="post" action="login.jsp" class="form">
-		<div class="field"> 
-			<label class="field__label" for="username">
-				Username
-				<input class="field__input" pattern=".{1,16}"type="text" id="username" name="username" required>
-			</label>
-		</div>
+		<form method="post" action="login.jsp" class="form">
+			<%if (request.getParameter("error") != null) { %>
+			<div class="error">
+				<p>Something went wrong with your login! Try again! <p/>
+			</div>
+			<% } %>
 		
-		<div class="field"> 
-			<label class="field__label" for="password">
-				Password
-				<input class="field__input" pattern=".{1,25}" type="password" id="password" name="password" required>
-			</label>
-		</div>
-		<input type="submit" value="Submit">
-	</form>
-	
+			<div class="field"> 		
+				<label class="field__label" for="username">Username</label>
+				<div class="field__input-container">
+					<input class="field__input" type="text" name="username" id="username" required>
+				</div>
+			</div>
+			
+			<div class="field"> 
+				<label class="field__label" for="password">Password</label>
+				<div class="field__input-container">			
+					<input class="field__input" type="password" name="password" id="password" required>
+				</div>
+			</div>
+			
+			<div class="form__input-container">
+				<input class="form__submit" type="submit" value="Submit">
+			</div>
+		</form>
 	
 </body>
 </html>
