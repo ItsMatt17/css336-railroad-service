@@ -20,6 +20,7 @@
 		:root {
 			--primary: oklch(86.9% 0.022 252.894);
 			--secondary: oklch(98.4% 0.003 247.858);	
+			--border-rad: .5rem;
 		}
 		
 		
@@ -31,46 +32,38 @@
 			align-items: center;
 			background-color: var(--primary);
 		}
-		
-		.form {
-			width: 50%;
-			max-width: 600px;
-			
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 1rem;
-			
-			padding: 1rem;
-			border-radius: .5rem;
-			background-color: var(--secondary);	
-		
-		}	
-		
-		.field {
-			width: 75%;
-			display: flex; 
-			flex-direction: column;
-			
-			
 	
-			
-			.field__input {
-        		width: 100%;
-				padding: .5rem;
-		
-		 	}
-		
+		.form { 
+			padding: 1rem;		
+			background-color: var(--secondary);
+			border-radius: var(--border-rad);
+			display: grid;
+			gap: .825rem;
 		
 		}
 		
+		.field{ 
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		
+		}
+		
+		.form__submit-container { 
+			display: flex; 
+			justify-content: center;
+			
+		
+		}
+		
+	
 		 
 	 	.error{
 	 		text-align: center;
 		 	padding: 1rem;
 		 	color: oklch(39.6% 0.141 25.723);
 		 	background-color: oklch(80.8% 0.114 19.571);
-		 	border-radius: .5rem;
+		 	border-radius: var(--border-rad);
 		 
 		 }
 	
@@ -93,18 +86,29 @@
 			<div class="field"> 		
 				<label class="field__label" for="username">Username</label>
 				<div class="field__input-container">
-					<input class="field__input" type="text" name="username" id="username" required>
+					<input class="field__input" 
+						   type="text" 
+						   name="username" 
+						   id="username" 
+						   pattern=".{1,16}"
+						   required>
+						   
 				</div>
 			</div>
 			
 			<div class="field"> 
 				<label class="field__label" for="password">Password</label>
 				<div class="field__input-container">			
-					<input class="field__input" type="password" name="password" id="password" required>
+					<input class="field__input" 
+						   type="password" 
+						   name="password" 
+						   id="password" 
+						   pattern=".{1, 25}"
+						   required>	
 				</div>
 			</div>
 			
-			<div class="form__input-container">
+			<div class="form__submit-container">
 				<input class="form__submit" type="submit" value="Submit">
 			</div>
 		</form>
