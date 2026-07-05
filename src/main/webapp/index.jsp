@@ -73,16 +73,15 @@
 		 	border-radius: .5rem;
 		 
 		 }
-		 
-		
-		
-		
-		
 	
 	 </style>
 
 </head>
 <body>
+		<% 
+		// If user is alread logged in, just redirect to dashboard
+		if (session.getAttribute("user") != null) response.sendRedirect("dashboard.jsp"); 
+		%>
 	
 		<form method="post" action="login.jsp" class="form">
 			<%if (request.getParameter("error") != null) { %>

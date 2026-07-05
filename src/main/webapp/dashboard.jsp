@@ -9,7 +9,18 @@
 <body>	
 
 
+
+<% 
+	// So users don't access w/o logging in 
+	if (session.getAttribute("user") == null){ 
+		response.sendRedirect("index.jsp");
+	}
+%>
+
 <p>Welcome!<p/>
+<form method="post" action="logout.jsp">
+	<button type="submit">Log out</button>
+</form>
 
 
 </body>
