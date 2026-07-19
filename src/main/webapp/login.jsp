@@ -30,7 +30,7 @@
 
     try (
         Connection connection =
-            new ApplicationDB().getConnection();
+            ApplicationDB.getConnection();
 
         PreparedStatement statement =
             connection.prepareStatement(sql)

@@ -1,5 +1,4 @@
 .settings
-
+*.iml
 .env
-
-
+.idea/*

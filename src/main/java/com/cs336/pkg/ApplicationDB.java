@@ -15,7 +15,9 @@ public class ApplicationDB {
     public ApplicationDB() {
     }
 
-    public Connection getConnection() throws SQLException {
+    
+    // Note: Converted to static
+    public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -32,7 +34,7 @@ public class ApplicationDB {
         );
     }
 
-    public void closeConnection(Connection connection) {
+    public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
