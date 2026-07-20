@@ -5,28 +5,32 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
   
-
-<%	
-	String sql = "SELECT lname FROM Line";
+  
+ <% 
+	String sql = "SELECT id, sname FROM Station";
 	try (
 		Connection conn = ApplicationDB.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet resp = stmt.executeQuery();
 	){ 
-		
-		out.print("<select>");
-		while(resp.next()){ 
-			String line = resp.getString("lname");
-			out.print("<option value=" + "'" + line + "'" + ">" + resp.getString("lname") +  "</option>");
-
-		}
-		out.print("</select>");
-			
-			
+%>
+	
+<% 
+	while(resp.next()){ 
+		String sname = resp.getString("sname");
+		int id  = resp.getInt("id");
+%> 
+	
+	<option value="<%=id%>"><%=sname%></option>
+	
+<%} %>
+	
+	
+	
+<% 		
 	}catch (Exception ex){ 
-      application.log("Database error while logging in.", ex);
-      out.print("<p> An error occurred: " + ex);
-      
+	     application.log("Database error while logging in.", ex);
+	     out.print("<p> An error occurred: " + ex);
 	}
 %>
 

@@ -12,13 +12,6 @@
 
 
 <%
-%>
-
-
-
-
-<%
-
     Object loggedInUser = session.getAttribute("user");
 
     if (loggedInUser == null) {
@@ -46,7 +39,7 @@
             <button type="submit">Log out</button>
         </form>
 
-		<%@ include file = "line_selection.jsp"  %>
+		<%@ include file = "train_search.jsp"  %>
         
         
     </main>

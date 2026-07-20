@@ -1,7 +1,7 @@
 
 ## Dependencies
 
-- Apache Tomcat v8.0
+- Apache Tomcat v9.0
 - Java 8.0+
 - Eclipse Java EE
 - MySQL Server
@@ -25,7 +25,6 @@ Go to the project directory
 
 ```
   src/main/resources/db.sql
-
 ```
  
  

@@ -2,7 +2,10 @@ package com.cs336.pkg;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 public class ApplicationDB {
 
@@ -43,17 +46,19 @@ public class ApplicationDB {
             }
         }
     }
+    
+ 
 
-    public static void main(String[] args) {
-        ApplicationDB dao = new ApplicationDB();
-
-        try {
-            Connection connection = dao.getConnection();
-            System.out.println("Database connection successful: " + connection);
-            dao.closeConnection(connection);
-        } catch (SQLException e) {
-            System.out.println("Database connection failed.");
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        ApplicationDB dao = new ApplicationDB();
+//
+//        try {
+//            Connection connection = dao.getConnection();
+//            System.out.println("Database connection successful: " + connection);
+//            dao.closeConnection(connection);
+//        } catch (SQLException e) {
+//            System.out.println("Database connection failed.");
+//            e.printStackTrace();
+//        }
+//    }
 }
