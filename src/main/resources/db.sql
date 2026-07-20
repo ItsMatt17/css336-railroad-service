@@ -27,7 +27,7 @@ CREATE TABLE Customer (
 
 
 CREATE TABLE Station (
-	id int, 
+	id int AUTO_INCREMENT, 
 	sname varchar(50) NOT NULL, 
 	city varchar(50) NOT NULL, 
 	state char(2) NOT NULL, 
@@ -39,6 +39,13 @@ CREATE TABLE Train (
     capacity int, 
     PRIMARY KEY (id)
 );
+
+
+/*TODO: 
+	1. Station arrival times / dept times based on lines
+    2. Customer reservations
+    3. 
+*/
 
 CREATE TABLE Line (
 	lname varchar(50), 
@@ -55,6 +62,8 @@ CREATE TABLE LineStop(
 	line varchar(50), 
     stop_num int, 
     station int NOT NULL, 
+    arr_offset_mins int NOT NULL, 
+    dept_offset_mins int NOT NULL,
     PRIMARY KEY(line, stop_num),
 	FOREIGN KEY (station) REFERENCES Station(id)
 );

@@ -39,7 +39,7 @@
             <button type="submit">Log out</button>
         </form>
 
-		<%@ include file = "train_search.jsp"  %>
+		<%@ include file = "schedule_form.jsp"  %>
         
         
     </main>

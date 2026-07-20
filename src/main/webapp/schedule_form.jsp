@@ -8,13 +8,14 @@
 
 	
 
-	<form>
-		<input type="date">
-		<select>
+	<form method="get" action="route_query.jsp">
+		Origin:
+		<select name="origin" required>
 			<jsp:include page = "station_options.jsp"  />
 		</select>
-		<select>
+		Destination:
+		<select name="dest" required>
 			<jsp:include page = "station_options.jsp" />
 		</select>
 		<input type="submit" value="Search">		
-	</form>
+	</form>	
