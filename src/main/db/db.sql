@@ -78,8 +78,7 @@ CREATE TABLE LineStop
 
 CREATE TABLE TrainSchedule
 (
-    start_time time,
-    date       date,
+    start_time   datetime,
     train_id   int,
     lname      varchar(50),
     PRIMARY KEY (start_time, train_id, lname),

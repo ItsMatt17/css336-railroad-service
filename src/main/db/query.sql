@@ -1,5 +1,7 @@
 #TODO: Implement query by date
 /* Fetches all possible lines matching given route & gets the org/dest times  */
+
+
 SELECT T.lname,
        DATE_ADD(T.start_time, INTERVAL L.org_arr MINUTE)  org_arr,
        DATE_ADD(T.start_time, INTERVAL L.dest_arr MINUTE) dest_arr

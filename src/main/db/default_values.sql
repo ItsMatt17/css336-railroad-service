@@ -76,11 +76,11 @@ VALUES ("NE Corridor-NB", 0, 1, 0, 0),
 
 
 
-INSERT INTO TrainSchedule(start_time, date, train_id, lname)
-VALUES ("6:30:00", "2026-07-21", 2, "NE Corridor-NB"),
-       ("6:30:00", "2026-07-21", 3, "NE Corridor-SB"),
-       ("8:03:00", "2026-07-21", 3, "NE Corridor-NB"),
-       ("8:03:00", "2026-07-21", 2, "NE Corridor-SB")
+INSERT INTO TrainSchedule(start_time, train_id, lname)
+VALUES ("2026-07-21 6:30:00", 2, "NE Corridor-NB"),
+       ("2026-07-21 6:30:00", 3, "NE Corridor-SB"),
+       ("2026-07-21 8:03:00", 3, "NE Corridor-NB"),
+       ("2026-07-21 8:03:00", 2, "NE Corridor-SB")
 
 
     
