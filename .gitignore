@@ -1,6 +1,7 @@
 .settings/
 .env
 .idea/
+.DS_Store
 css336-railroad-service.iml
 build/classes/*
 !build/classes
