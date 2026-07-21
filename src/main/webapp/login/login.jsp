@@ -10,7 +10,7 @@
 <%
     // Only process login form submissions.
     if (!"POST".equalsIgnoreCase(request.getMethod())) {
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("../index.jsp");
         return;
     }
 
@@ -20,7 +20,7 @@
     if (username == null || password == null ||
         username.trim().isEmpty() || password.isEmpty()) {
 
-        response.sendRedirect("index.jsp?error=invalid");
+        response.sendRedirect("../index.jsp");
         return;
     }
 
@@ -45,17 +45,17 @@
                     result.getString("username")
                 );
 
-                response.sendRedirect("dashboard.jsp");
+                response.sendRedirect("../dashboard.jsp");
                 return;
             }
 
-            response.sendRedirect("index.jsp?error=invalid");
+            response.sendRedirect("../index.jsp");
             return;
         }
 
     } catch (Exception e) {
         application.log("Database error while logging in.", e);
-        response.sendRedirect("index.jsp?error=server");
+        response.sendRedirect("../index.jsp");
         return;
     }
 %>

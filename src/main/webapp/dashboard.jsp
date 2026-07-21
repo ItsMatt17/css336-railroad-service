@@ -11,14 +11,7 @@
     pageEncoding="UTF-8" %>
 
 
-<%
-    Object loggedInUser = session.getAttribute("user");
-
-    if (loggedInUser == null) {
-        response.sendRedirect("index.jsp");
-        return;
-    }
-%>
+<%@ include file = "login/is_logged_in.jsp"  %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +28,7 @@
 
         <h1>Welcome, <%= loggedInUser %>!</h1>
 
-        <form method="post" action="logout.jsp">
+        <form method="post" action="login/logout.jsp">
             <button type="submit">Log out</button>
         </form>
 

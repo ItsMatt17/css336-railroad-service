@@ -78,7 +78,7 @@
 </head>
 
 <body>
-    <form method="post" action="login.jsp" class="form">
+    <form method="post" action="login/login.jsp" class="form">
 
         <% if ("invalid".equals(error)) { %>
             <div class="error">

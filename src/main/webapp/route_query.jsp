@@ -6,65 +6,45 @@
 <%@ page import="java.sql.ResultSet" %>
   
 <%!
+	// Fetches matching lines given an origin and destination
+	String line_query = "SELECT O.lname  " +  
+						 "FROM LineStop O, LineStop D " + 
+						 "WHERE " +
+						 	"O.lname = D.lname AND " + 
+							"O.station = ? AND "  + 
+						    "D.station = ? AND " +
+						    "O.stop_num < D.stop_num";
 
-
-	String sql = "SELECT O.lname  " +  
-				 "FROM LineStop O, LineStop D " + 
-				 "WHERE " +
-				 	"O.lname = D.lname AND " + 
-					"O.station = ? AND "  + 
-				    "D.station = ? AND " +
-				    "O.stop_num < D.stop_num";
 
 %>
 
 
-<% 
-	Object loggedInUser = session.getAttribute("user");
-	
-	 if (loggedInUser == null) {
-	     response.sendRedirect("index.jsp");
-	     return;
-	 }
-	 
-	 if (!request.getMethod().equals("GET")){ 
-	     response.sendRedirect("dashboard.jsp/error=invalid_method");
-	     return;
-	 }
-%>
 
+<%@ include file = "login/is_logged_in.jsp"  %>
 
 <%
-	try
-		(	
+	try(	
 		Connection conn = ApplicationDB.getConnection();
-		PreparedStatement stmt = conn.prepareStatement(sql);
-
-		){ 
-			int origin_id = Integer.valueOf(request.getParameter("origin"));
-			int dest_id = Integer.valueOf(request.getParameter("dest"));
+		PreparedStatement stmt = conn.prepareStatement(line_query);
+	){
+			int origin_id = Integer.parseInt(request.getParameter("origin"));
+			int dest_id = Integer.parseInt(request.getParameter("dest"));
 			
 			stmt.setInt(1, origin_id);
 			stmt.setInt(2, dest_id);
 			ResultSet res = stmt.executeQuery();
-			if(res.next() == false){
-				out.print("<p> There's no route that can get you there :( </p>");
-				return;
-			}else { 
-				
+			
+			if(!res.next()) response.sendRedirect("dashboard.jsp?error=route_times");
+			else {
 				String line = res.getString("lname");
-				out.print("<p> There's a route that can bring you there:  " + line + "</p>");
-				
-			}
-		
-		
+				response.sendRedirect("route_times.jsp?line=" + line + "&origin=" + origin_id + "&dest=" + dest_id);
+		}
 	}catch(Exception ex) {
-		out.print("<p/> Whoops there was an error :( | " + ex + "</p>");
-		
+     	application.log("Database error while logging in.", ex);
+		response.sendRedirect("dashboard.jsp?error=route_times");
+
+					
 	}
-
-
-
 
 %>
 

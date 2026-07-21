@@ -8,14 +8,14 @@
 
 	
 
-	<form method="get" action="route_query.jsp">
-		Origin:
-		<select name="origin" required>
-			<jsp:include page = "station_options.jsp"  />
-		</select>
-		Destination:
-		<select name="dest" required>
-			<jsp:include page = "station_options.jsp" />
-		</select>
-		<input type="submit" value="Search">		
-	</form>	
+<form method="get" action="route_query.jsp">
+	Origin:
+	<select name="origin" required>
+		<jsp:include page = "station_options.jsp"  />
+	</select>
+	Destination:
+	<select name="dest" required>
+		<jsp:include page = "station_options.jsp" />
+	</select>
+	<input type="submit" value="Search">		
+</form>	

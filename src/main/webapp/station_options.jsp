@@ -13,24 +13,15 @@
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		ResultSet resp = stmt.executeQuery();
 	){ 
-%>
-	
-<% 
-	while(resp.next()){ 
+	while(resp.next()){
 		String sname = resp.getString("sname");
 		int id  = resp.getInt("id");
-%> 
-	
-	<option value="<%=id%>"><%=sname%></option>
-	
-<%} %>
-	
-	
-	
-<% 		
+		out.print("<option value=" + id + ">" + sname +  "</option>");
+	}
+
 	}catch (Exception ex){ 
 	     application.log("Database error while logging in.", ex);
 	     out.print("<p> An error occurred: " + ex);
-	}
-%>
+}
 
+%>

@@ -1,3 +1,6 @@
 .settings/
 .env
 .idea/
+css336-railroad-service.iml
+build/*
+!build

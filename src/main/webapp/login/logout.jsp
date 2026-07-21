@@ -4,6 +4,6 @@
 
 <%
     session.invalidate();
-    response.sendRedirect("index.jsp?message=loggedout");
+    response.sendRedirect("../index.jsp");
     return;
 %>
