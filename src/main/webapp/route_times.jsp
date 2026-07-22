@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java"
+         contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+%>
 <%@ page import="com.cs336.pkg.ApplicationDB" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
@@ -35,7 +37,7 @@
     int origin_id = Integer.parseInt(request.getParameter("origin"));
     int dest_id = Integer.parseInt(request.getParameter("dest"));
     List<Map<String, Object>> res = ApplicationDB.query(route_times, origin_id, dest_id);
-    
+
         if (res.isEmpty()) {
             out.print("<p> Seems that there is no line / schedule that can take you there</p>");
             application.log("Origin: " + origin_id + " Dest: " + dest_id);

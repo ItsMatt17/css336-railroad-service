@@ -1,6 +1,7 @@
 <%@ page language="java"
     contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"
+%>
 
 <%
     if (session.getAttribute("user") != null) {
@@ -10,7 +11,9 @@
 
     String error = request.getParameter("error");
     String message = request.getParameter("message");
+
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +84,7 @@
     <form method="post" action="login/login.jsp" class="form">
 
         <% if ("invalid".equals(error)) { %>
+
             <div class="error">
                 <p>Incorrect username or password.</p>
             </div>

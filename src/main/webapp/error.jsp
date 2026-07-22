@@ -8,6 +8,7 @@
     <title>Error Page </title>
 </head>
 <body>
+
     <h1>Whoops! There's been an error!</h1>
     <p>Error: <%= exception.getMessage()%></p>
 </body>
