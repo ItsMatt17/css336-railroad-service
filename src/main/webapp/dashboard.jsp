@@ -24,9 +24,10 @@
             <input type="submit" value="Log out">
         </form>
 
-		<%@ include file = "schedule_form.jsp"  %>
-        
-        
+        <%@ include file = "schedule_form.jsp" %>
+        <%@ include file = "get_reservations.jsp" %>
+
+
     </main>
 </body>
 </html>

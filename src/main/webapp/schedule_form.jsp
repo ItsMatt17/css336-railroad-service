@@ -8,12 +8,12 @@
 
 	<label for="origin">Origin:</label>
 	<select name="origin" id="origin" required>
-		<jsp:include page = "station_options.jsp"  />
+		<jsp:include page = "get_station_options.jsp"  />
 	</select>
 
 	<label for="dest">Dest:</label>
 	<select id="dest" name="dest" required>
-		<jsp:include page = "station_options.jsp" />
+		<jsp:include page = "get_station_options.jsp" />
 	</select>
 	<input type="submit" value="Search">		
 </form>	

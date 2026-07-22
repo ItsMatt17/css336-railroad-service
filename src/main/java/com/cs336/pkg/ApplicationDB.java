@@ -16,9 +16,7 @@ public class ApplicationDB {
     private static final String DATABASE_USER = "root";
     private static final String DATABASE_PASSWORD = "1234";
 
-    public ApplicationDB() {
-    }
-
+    public ApplicationDB() {}
 
     // Note: Converted to static
     public static Connection getConnection() throws SQLException {
@@ -38,6 +36,12 @@ public class ApplicationDB {
         );
     }
 
+
+//    public List<Reservation> getReservations(String username){
+//
+//
+//    }
+
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
@@ -47,6 +51,19 @@ public class ApplicationDB {
             }
         }
     }
+
+
+    public static int insert(String sql, Object... params) throws SQLException {
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            for (int i = 0; i < params.length; i++) {
+                stmt.setObject(i + 1, params[i]);
+            }
+            return stmt.executeUpdate();
+        }
+    }
+
 
 
 

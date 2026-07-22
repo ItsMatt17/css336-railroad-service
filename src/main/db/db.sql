@@ -8,7 +8,7 @@ CREATE TABLE User
     pass       varchar(25) NOT NULL,
     fname      varchar(30) NOT NULL,
     lname      varchar(30) NOT NULL,
-    permission ENUM ('NONE', 'REP', 'ADMIN'),
+    permission ENUM ('NONE', 'REP', 'ADMIN') NOT NULL DEFAULT 'NONE',
     PRIMARY KEY (username)
 );
 
@@ -86,7 +86,7 @@ CREATE TABLE TrainSchedule
     FOREIGN KEY (lname) References Line (lname)
 );
 
-
+/* TODO: I promise this is not the final version I will normalize this somehow */
 CREATE TABLE Reservation
 (
     id         int AUTO_INCREMENT,
@@ -96,15 +96,13 @@ CREATE TABLE Reservation
     lname      varchar(50) NOT NULL,
     origin     int         NOT NULL,
     dest       int         NOT NULL,
-    creation   datetime    NOT NULL,
-    trip_type  ENUM('ONEWAY', 'ROUNDTRIP') NOT NULL,
+    creation   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    trip_type  ENUM('ONE_WAY', 'ROUND_TRIP') NOT NULL DEFAULT 'ONE_WAY',
+    discount   ENUM('NONE', 'CHILD', 'ELDERLY', 'DISABLED') NOT NULL DEFAULT 'NONE',
     PRIMARY KEY(id),
     FOREIGN KEY(username) REFERENCES User(username),
     FOREIGN KEY(start_time, train_id, lname) REFERENCES TrainSchedule(start_time, train_id, lname),
     FOREIGN KEY(origin) REFERENCES Station(id),
     FOREIGN KEY(dest) REFERENCES Station(id)
 );
-
-CREATE TABLE ReservationFare(   )
-
 

@@ -11,5 +11,10 @@
 
     <h1>Whoops! There's been an error!</h1>
     <p>Error: <%= exception.getMessage()%></p>
+    <div>
+        Stacktrace
+        <p> <%= exception.fillInStackTrace()%></p>
+
+    </div>
 </body>
 </html>
