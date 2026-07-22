@@ -4,7 +4,7 @@
 <%
 	Object loggedInUser = session.getAttribute("user");
 	 if (loggedInUser == null) {
-	     response.sendRedirect("../index.jsp");
+	     response.sendRedirect("index.jsp");
 	     return;
 	 }
 %>

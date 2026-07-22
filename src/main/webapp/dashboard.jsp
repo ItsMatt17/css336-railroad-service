@@ -18,10 +18,10 @@
             You have been logged in successfully.
         </p>
 
-        <h1>Welcome, <%= loggedInUser %>!</h1
+        <h1>Welcome, <%= loggedInUser %>!</h1>
 
-        <form method="post" action="login/logout.jsp">
-            <button type="submit">Log out</button>
+        <form method="POST" action="login/logout.jsp">
+            <input type="submit" value="Log out">
         </form>
 
 		<%@ include file = "schedule_form.jsp"  %>

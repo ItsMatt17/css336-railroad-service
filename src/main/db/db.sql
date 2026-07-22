@@ -8,7 +8,7 @@ CREATE TABLE User
     pass       varchar(25) NOT NULL,
     fname      varchar(30) NOT NULL,
     lname      varchar(30) NOT NULL,
-    permission ENUM ('None', 'Rep', 'Admin'),
+    permission ENUM ('NONE', 'REP', 'ADMIN'),
     PRIMARY KEY (username)
 );
 
@@ -78,12 +78,33 @@ CREATE TABLE LineStop
 
 CREATE TABLE TrainSchedule
 (
-    start_time   datetime,
+    start_time datetime,
     train_id   int,
     lname      varchar(50),
     PRIMARY KEY (start_time, train_id, lname),
     FOREIGN KEY (train_id) REFERENCES Train (id),
     FOREIGN KEY (lname) References Line (lname)
 );
+
+
+CREATE TABLE Reservation
+(
+    id         int AUTO_INCREMENT,
+    username   varchar(16) NOT NULL,
+    start_time datetime    NOT NULL,
+    train_id   int         NOT NULL,
+    lname      varchar(50) NOT NULL,
+    origin     int         NOT NULL,
+    dest       int         NOT NULL,
+    creation   datetime    NOT NULL,
+    trip_type  ENUM('ONEWAY', 'ROUNDTRIP') NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(username) REFERENCES User(username),
+    FOREIGN KEY(start_time, train_id, lname) REFERENCES TrainSchedule(start_time, train_id, lname),
+    FOREIGN KEY(origin) REFERENCES Station(id),
+    FOREIGN KEY(dest) REFERENCES Station(id)
+);
+
+CREATE TABLE ReservationFare(   )
 
 
