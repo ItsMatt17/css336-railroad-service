@@ -102,8 +102,8 @@ public class ApplicationDB {
         }
     }
 
-
-    public static int insert(String sql, Object... params) throws SQLException {
+    // This is used for deletes, inserts, and update methods in sql
+    public static int update(String sql, Object... params) throws SQLException {
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);) {
 

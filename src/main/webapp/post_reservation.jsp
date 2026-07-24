@@ -34,7 +34,7 @@
     fare = (fare * tripType.factor) * (1 - discount.percent);
 
 
-    int updated = ApplicationDB.insert(insertReservation, username,
+    int updated = ApplicationDB.update(insertReservation, username,
                                         schedDateTime, trainId, line,
                                         originId, destId,
                                         tripType.label, discount.label, fare);

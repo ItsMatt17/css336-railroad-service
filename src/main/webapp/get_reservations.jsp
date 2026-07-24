@@ -41,7 +41,6 @@
     <%
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a MM/dd/yyyy");
         for (Map<String, Object> r : res) {
-            r.keySet().forEach(k -> System.out.println(k));
             String line = (String) r.getOrDefault("lname", "None");
             int id = (int) r.getOrDefault("id", -1);
             String org_station_name = (String) r.getOrDefault("org_station", "Unknown");
@@ -50,14 +49,17 @@
 
 
     %>
-
-    <div style="background-color:oklch(80.9% 0.105 251.813);">
-        <p>id: <%= id  %></p>
-        <p>created: <%= creation.format(formatter)  %></p>
-        <p>Line: <%= line  %> </p>
-        <p>Origin ID: <%= org_station_name %></p>
-        <p>Dest ID: <%= dest_station_name %></p>
-    </div>
+    <form style="background-color:oklch(80.9% 0.105 251.813);" method="post" action="delete_reservation.jsp">
+        <input type="hidden" name="id" value="<%= id %>">
+        <div>
+            <p>id: <%= id  %></p>
+            <p>created: <%= creation.format(formatter)  %></p>
+            <p>Line: <%= line  %> </p>
+            <p>Origin ID: <%= org_station_name %></p>
+            <p>Dest ID: <%= dest_station_name %></p>
+        </div>
+        <input type="submit" value="Refund">
+    </form>
 
     <%}%>
 
