@@ -6,6 +6,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.cs336.pkg.Permission" %>
 
 <%
     // Only process login form submissions.
@@ -25,7 +26,7 @@
     }
 
     String sql =
-        "SELECT username FROM `User` " +
+        "SELECT username, permission FROM `User` " +
         "WHERE username = ? AND pass = ?";
 
     try (
@@ -40,9 +41,15 @@
 
         try (ResultSet result = statement.executeQuery()) {
             if (result.next()) {
+                System.out.println(result.getString("permission"));
                 session.setAttribute(
                     "user",
                     result.getString("username")
+                );
+                System.out.println(Permission.valueOfOrDefault(result.getString("permission")).toString());
+                session.setAttribute(
+                        "permission",
+                        Permission.valueOfOrDefault(result.getString("permission")).toString()
                 );
 
                 response.sendRedirect("../dashboard.jsp");

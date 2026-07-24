@@ -36,9 +36,9 @@ INSERT INTO Train(id, capacity)
 VALUES (2, 200),
        (3, 100);
 
-INSERT INTO Line(lname, fare, duration_mins, origin, dest)
-VALUES ("NE Corridor-NB", 50.25, 93, 1, 14),
-       ("NE Corridor-SB", 50.25, 93, 14, 1);
+INSERT INTO Line(lname, per_stop_fare, duration_mins, origin, dest)
+VALUES ("NE Corridor-NB", 5, 93, 1, 14),
+       ("NE Corridor-SB", 5, 93, 14, 1);
 
 
 
@@ -80,7 +80,20 @@ INSERT INTO TrainSchedule(start_time, train_id, lname)
 VALUES ("2026-07-21 6:30:00", 2, "NE Corridor-NB"),
        ("2026-07-21 6:30:00", 3, "NE Corridor-SB"),
        ("2026-07-21 8:03:00", 3, "NE Corridor-NB"),
-       ("2026-07-21 8:03:00", 2, "NE Corridor-SB")
+       ("2026-07-21 8:03:00", 2, "NE Corridor-SB");
+
+INSERT INTO Discount(id, percent)
+VALUES
+    ('NONE', 0),
+    ('CHILD', .25),
+    ('ELDERLY', 0.35),
+    ('DISABLED', 0.50);
 
 
-    
+INSERT INTO TripType(id, price_factor)
+VALUES
+    ('ONE_WAY', 1),
+    ('ROUND_TRIP', 2);
+
+
+

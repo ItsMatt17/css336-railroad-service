@@ -3,17 +3,14 @@
 <%@ page import="com.cs336.pkg.ApplicationDB" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.cs336.pkg.Station" %>
 
 
 <%
-	String sql = "SELECT id, sname FROM Station";
 	//TODO: Implement error pages instead of try catches
-    List<Map<String, Object>> rows = ApplicationDB.query(sql);
-
-	for(Map<String, Object> resp : rows){
-		String sname = (String) resp.get("sname");
-		int id = (int) resp.get("id");
-		out.print("<option value=" + id + ">" + sname +  "</option>");
+	List<Station> stations = ApplicationDB.getStations();
+	for(Station resp : stations){
+		out.print("<option value=" + resp.id() + ">" + resp.name() +  "</option>");
 	}
 
 %>
