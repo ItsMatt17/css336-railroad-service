@@ -67,7 +67,8 @@
 
     out.print("<div>");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm MM/dd/yyyy");
-    for(Map<String, Object> r : res){
+    for(int i = 0; i < res.size(); i++){
+        Map<String, Object> r = res.get(i);
         // These all can uniquely identify a train schedule
         int trainId = (int) r.get("train_id");
         String line = (String) r.get("lname");
@@ -77,47 +78,51 @@
         LocalDateTime lineStartTime = (LocalDateTime) r.get("start_time");
         LocalDateTime arrTime = (LocalDateTime) r.get("org_arr");
         LocalDateTime destTime = (LocalDateTime) r.get("dest_arr");
-
-
 %>
-        <form method="post" action="post_reservation.jsp" style="background-color:oklch(80.9% 0.105 251.813);">
-            <h1>Line: <%= line %></h1>
-            <p>Arr Time: <%= arrTime.format(formatter) %></p>
-            <p>Dest Time: <%= destTime.format(formatter) %></p>
-            <p>Stops From Org to Dest: <%= stops %></p>
-            <p>Fare Per Stop: <%= fare %></p>
-            <p >Cost: $<span id="cost"><%= fare * stops %></span></p>
+    <form method="post" id=<%= i %> action="post_reservation.jsp" style="background-color:oklch(80.9% 0.105 251.813);">
+        <h1>Line: <%= line %></h1>
+        <p>Arr Time: <%= arrTime.format(formatter) %></p>
+        <p>Dest Time: <%= destTime.format(formatter) %></p>
+        <p>Stops From Org to Dest: <%= stops %></p>
+        <p>Fare Per Stop: <%= fare %></p>
+        <p >Cost: $<span id="cost-<%= i %>"><%= fare * stops %></span></p>
 
-            <input type="hidden" name="origin" value="<%= originId %>">
-            <input type="hidden" name="dest" value="<%= destId %>">
-            <input type="hidden" name="line" value="<%= line %>">
-            <input type="hidden" name="train-id" value="<%= trainId %>">
-            <input type="hidden" name="line-start-dt" value="<%= lineStartTime.toString() %>">
-            <input type="hidden" name="fare" value="<%= fare * stops %>">
+        <input type="hidden" name="origin" value="<%= originId %>">
+        <input type="hidden" name="dest" value="<%= destId %>">
+        <input type="hidden" name="line" value="<%= line %>">
+        <input type="hidden" name="train-id" value="<%= trainId %>">
+        <input type="hidden" name="line-start-dt" value="<%= lineStartTime.toString() %>">
+        <input type="hidden" name="fare" value="<%= fare * stops %>">
 
-            <input type="reset" value="Clear">
-            <fieldset>
-                <%-- TODO: Make this a drop down  --%>
-                <legend>Discount</legend>
-                <input class="discount" type="radio" name="discount" id="disabled" value="<%= Discount.DISABLED.label %>">
-                <label for="disabled">Disability (50%)</label>
+        <input type="reset" value="Clear">
+        <fieldset>
+            <%-- TODO: Make this a drop down  --%>
+            <legend>Discount</legend>
+            <label>
+                <input class="discount" type="radio" name="discount" value="<%= Discount.DISABLED.label %>">
+                Disability (50%)
+            </label>
 
-                <input class="discount" type="radio" name="discount" id="child" value="<%= Discount.CHILD.label %>">
-                <label for="child">Child (25%)</label>
+            <label>
+                <input class="discount" type="radio" name="discount" value="<%= Discount.CHILD.label %>">
+                Child (25%)
+            </label>
 
-                <input class="discount" type="radio" name="discount" id="elderly" value="<%= Discount.ELDERLY.label %>">
-                <label for="elderly">Elderly (35%)</label>
-            </fieldset>
-            <fieldset>
-                <legend>Trip Type</legend>
-                <input type="radio" name="ticket-type" id="round" value="<%= TicketType.ROUND_TRIP.label %>" required>
-                <label for="round">Round Trip</label>
+            <label for="elderly">
+                <input class="discount" type="radio" name="discount" value="<%= Discount.ELDERLY.label %>">
+                Elderly (35%)
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Trip Type</legend>
+            <input type="radio" name="ticket-type" id="round" value="<%= TicketType.ROUND_TRIP.label %>" >
+            <label for="round">Round Trip</label>
 
-                <input type="radio" name="ticket-type" id="one-way" value="<%= TicketType.ONE_WAY.label %>" checked>
-                <label for="one-way">One Way</label>
-            </fieldset>
-            <input type="submit" value="Register">
-        </form>
+            <input type="radio" name="ticket-type" id="one-way" value="<%= TicketType.ONE_WAY.label %>" checked>
+            <label for="one-way">One Way</label>
+        </fieldset>
+        <input type="submit" value="Register">
+    </form>
 
 <%
     }out.print("</div>");
@@ -126,27 +131,43 @@
 
 </body>
 <script>
-    // let cost = document.getElementById("cost")
-    // let costBase = parseFloat(cost.textContent)
-    // let disc = document.querySelectorAll('input[name="discount"]');
-    //
-    // let discMap = {
-    //     "disabled": 0.5,
-    //     "child": 0.25,
-    //     "elderly": 0.35
-    // }
-    //
-    // disc.forEach((el) => el.addEventListener("change", (e) => {
-    //     const type = e.target.id.toString()
-    //     const per = discMap[type] ?? 0
-    //     cost.textContent = (costBase - costBase * per).toString();
-    // }))
-    //
-    // disc.forEach((el) => el.addEventListener("change", (e) => {
-    //     const type = e.target.id.toString()
-    //     const per = discMap[type] ?? 0
-    //     cost.textContent = (costBase - costBase * per).toString();
-    // }))
+    const forms = document.querySelectorAll("form");
+
+    let discMap = {
+        "DISABLED": 0.5,
+        "CHILD": 0.25,
+        "ELDERLY": 0.35,
+        "NONE": 0
+    }
+
+    let tripTypeMap = {
+        "ROUND_TRIP": 2,
+        "ONE_WAY": 1
+    }
+
+    forms.forEach((form) => form.addEventListener("change", (_) => {
+        const cost = form.querySelector("#cost-" + form.id)
+        const costBaseField = form.querySelector("input[name=fare]")
+        const costBase = parseFloat(costBaseField?.value  ?? 0)
+
+        const activeDiscount = form.querySelector('input[name="discount"]:checked');
+        const discountPercent = discMap[activeDiscount?.value ?? "none"] ?? 0;
+
+        const activeTripType = form.querySelector('input[name="ticket-type"]:checked');
+        const tripFactor = tripTypeMap[activeTripType?.value ?? "ONE_WAY"]
+
+        let newCost = (costBase * tripFactor) * (1 - discountPercent);
+        cost.textContent = String(newCost.toFixed(2))
+    }))
+
+    forms.forEach((form) => form.addEventListener("reset", (_) => {
+        const cost = form.querySelector("#cost-" + form.id)
+        const costBaseField = form.querySelector("input[name=fare]")
+        cost.textContent = costBaseField?.value ?? "0.0"
+
+
+    }))
+
 
 </script>
 

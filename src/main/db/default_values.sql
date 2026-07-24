@@ -41,7 +41,6 @@ VALUES ("NE Corridor-NB", 5, 93, 1, 14),
        ("NE Corridor-SB", 5, 93, 14, 1);
 
 
-
 INSERT INTO LineStop(lname, stop_num, station, arr_offset_mins, dept_offset_mins)
 VALUES ("NE Corridor-NB", 0, 1, 0, 0),
        ("NE Corridor-NB", 1, 2, 5, 5),
